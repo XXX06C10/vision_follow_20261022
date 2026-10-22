@@ -1,0 +1,17 @@
+# FPGA build and simulation outputs
+/vision_follow_20261022_Runs/
+/output/
+/sim/results/
+/__pycache__/
+**/__pycache__/
+
+# Generated netlists, bitstreams, binaries and logs
+/routed_netlist.v
+*.bit
+*.fs
+*.vvp
+*.log
+*.logw
+
+# Python cache
+*.py[cod]

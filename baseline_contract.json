@@ -1,0 +1,62 @@
+{
+  "status": "SOFTWARE_BUILD_PASS_AWAITING_PHYSICAL_CONTINUOUS_CONTROL_TEST",
+  "date": "2026-10-22",
+  "user_requirement": "旧视觉/电机工程仅供参考；代码开发必须严格按照一路已运行成功的脚本和控制行为。",
+  "references": {
+    "d36a_autocal_latch_20261020": {
+      "build.ps1": "09a227008175a80e0be5018eb8511051b7025c0e9c6959348b7d68f39362e0ad",
+      "build.tcl": "a5d6e9ba6724665b68ff56a9f5d806a26a3c7f40c5edcba4a41d02ea6dee16cf",
+      "run_sim.ps1": "577e2d3631d00ea519f436179c124be5bf34f438af14bfd65f472b77988effa0",
+      "compose.py": "5345ae1e6b2e9ec70af32ae72f17a7081073e051924c497b92a6e8752b1cfe42",
+      "d36a_autocal_latch_20261020.adc": "2c9628280233ae3995b861df42cf1bf609fb7d0095d301a15dc61c08dec4d7fa",
+      "d36a_autocal_latch_20261020.sdc": "24557cc5ed91b3522873501a0b1a7c90bc40c60fb1ca20ea5e3c40f908b7dc34",
+      "rtl/autocal_core.v": "7ee67b071c527d76bba92d0042823724af751f9ca09f29657f19aa1f818406f6",
+      "rtl/autocal_report_tx.v": "3672a59fd5739a336a2f32026ba2ce2a1a13e5f95ec4db17165664867e5e9f06",
+      "rtl/d36a_autocal_latch_20261020.v": "b6845044b05b8939c6d7a468c5a8ea8b989964ff6e8dfbe4495aff720e9f117c",
+      "rtl/enable_latch.v": "9c5d7b40736c2a5cd7d6f638818ffe0d9b977cb8780f0c4864dcab2a43946f1f",
+      "rtl/encoder_ab_counter.v": "cfcddb9c0fccb87a47b5a9c1556d80d715f79a0b55f9d3803ce20b4862a567f7",
+      "rtl/top.v": "aaed8c31cff7218b8e174be7829a95963e1e4bb31b06c27de96563b62f9a79cc",
+      "output/d36a_autocal_latch_20261020.bit": "3c76cc6bed6f8219714435afb2aa3b23462b2408751be2fa0afd2a80ff323906"
+    },
+    "d36a_position5_20261020": {
+      "build.ps1": "8154025a5a0688172ad8545687e2b76764fd8848d1a085bfc53c8cd79f99e6e4",
+      "build.tcl": "6640db63aa0e4ce4f7bad0fad33d20e6d02d2fd4575f8305939f3cd71bace591",
+      "run_sim.ps1": "2e6e6c9fea6fdad1ff2b7cead022821bf9a2c8de78147be534236a156081c948",
+      "compose.py": "498f7f19959fd8458fb75aabbbcdeffa33138380c9fa994a0c0f65d640ff3416",
+      "d36a_position5_20261020.adc": "2c9628280233ae3995b861df42cf1bf609fb7d0095d301a15dc61c08dec4d7fa",
+      "d36a_position5_20261020.sdc": "24557cc5ed91b3522873501a0b1a7c90bc40c60fb1ca20ea5e3c40f908b7dc34",
+      "rtl/d36a_position5_20261020.v": "b365ac4d70a3cbd561052ddbaa43a847259f8045a17b2df633f9b814a55dc3ab",
+      "rtl/encoder_ab_counter.v": "cfcddb9c0fccb87a47b5a9c1556d80d715f79a0b55f9d3803ce20b4862a567f7",
+      "rtl/position_core.v": "427ec3b403e4264dd607caf8aca347bc0005d3f5c210cd95c1b1c863eab0ac3d",
+      "rtl/position_report_tx.v": "723a2cfb899a00f3acbc4bc41a371a2277ffa7c3943bfadfd3fbd8c017c60c8c",
+      "rtl/top.v": "34550bc3eae55949e7423f901459db7cbdcd35f0008b4e800ffff69f701bba07",
+      "output/d36a_position5_20261020.bit": "ef9656c75f000992c8791f6098024ae10319fb38f469367f31e75ab69131bb0b"
+    },
+    "d36a_autocal_20261020": {
+      "build.ps1": "cee9271569923ee9231f5d2d56f168e47736ee36d021ad9d7c263be1b34c872e",
+      "build.tcl": "45485d39e025c27f2cf56f1881b375beb1f79fba27287f808c3826fa3e046ba9",
+      "run_sim.ps1": "f2467ce42a5ff9340f66dc7e4e60bdbf3321683c2d949e7ae2f8e83039ae2e93",
+      "compose.py": "4f8740e264125cb682d14a62b9243d01c2b2889d1613edadf0a1f06b68c0d699",
+      "d36a_autocal_20261020.adc": "2c9628280233ae3995b861df42cf1bf609fb7d0095d301a15dc61c08dec4d7fa",
+      "d36a_autocal_20261020.sdc": "24557cc5ed91b3522873501a0b1a7c90bc40c60fb1ca20ea5e3c40f908b7dc34",
+      "rtl/autocal_core.v": "0c88fdf2debee2bdec162151c5641b38e169783189f6f45eaaaa0f63b73e6fe9",
+      "rtl/autocal_report_tx.v": "3672a59fd5739a336a2f32026ba2ce2a1a13e5f95ec4db17165664867e5e9f06",
+      "rtl/d36a_autocal_20261020.v": "6e3de77508182d98981a3965a399a81450a264db0c7d23ec8a28a2e1fd596554",
+      "rtl/encoder_ab_counter.v": "cfcddb9c0fccb87a47b5a9c1556d80d715f79a0b55f9d3803ce20b4862a567f7",
+      "rtl/top.v": "0ab8a34a819ee76dd373352535364f7748b6e5caf5e13038d10e0b78d44da0cb",
+      "output/d36a_autocal_20261020.bit": "129bc5480205bd155c1d8dbfc5044b2b4c2d5e09e3c251852110cd0a162fcdd2"
+    }
+  },
+  "reference_project": "lab_hd_1_mipi_hdmi_1080p_steel_ball_motor_manual",
+  "forbidden_trusted_motor_source": "steel_ball_motor_manual.v",
+  "next_milestone": "physical continuous-control direction, platform reference and tuning with captured VIS5 metrics",
+  "delivered_bit_sha256": "2c4d1f78aea341f11e157d289467434596a03739af1769e3c8109b875f9099eb",
+  "physical_fusion_test": "PENDING_USER_BOARD_TEST",
+  "camera_defaults": {
+    "exposure": 3600,
+    "sensor_gain": 143
+  },
+  "report_version": 4,
+  "no_new_bit_delivered_this_turn": false,
+  "physical_test": "PENDING_USER_LARGE60_BOARD_TEST"
+}

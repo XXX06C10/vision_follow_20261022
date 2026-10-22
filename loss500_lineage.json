@@ -1,0 +1,7 @@
+{
+  "archive": "D:\\AAAProject\\FPGA\\AAA_LookHere\\成功版本归档\\20261022_VIS5_短丢容忍前",
+  "archive_zip": "D:\\AAAProject\\FPGA\\AAA_LookHere\\成功版本归档\\20261022_VIS5_短丢容忍前.zip",
+  "old_bit_sha256": "1890c0545bd035ef84b0b8406653483c17826084f8b423d0f2ee671327f2c062",
+  "date": "2026-10-22",
+  "approved": "normal red45/ratio2, local red35/ratio1.5 within48sensor pixels,2 missed frame history,500ms valid-ball grace,200ms result watchdog; only running AUTO may coast; all motor bounds retained"
+}

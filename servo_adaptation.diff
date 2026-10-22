@@ -1,0 +1,100 @@
+--- archived_large60/vision_move_core.v
++++ vision_servo_core.v
+@@ -1,11 +1,12 @@
+ // Adapted from the physically passed position_core: same pulse phases and guards.
+-// New commands are K2 edges sampling a visual target, never a continuous setpoint.
+-module vision_move_core #(
++// External requests share the finite guard sequence; follow retargets only at CHECK.
++module vision_servo_core #(
+  parameter integer DEBOUNCE_CYCLES=1000000,ENABLE_CYCLES=5000000,SETUP_CYCLES=1000000,
+  HALF_CYCLES=125000,SETTLE_CYCLES=2500000,TIMEOUT_CYCLES=250000000,
+- POSITION_LIMIT=64,FEEDBACK_LIMIT=64,MOVE_BUDGET=64,NO_RESPONSE_LIMIT=3,TARGET_LIMIT=60,DEADBAND=2
++ POSITION_LIMIT=64,FEEDBACK_LIMIT=64,MOVE_BUDGET=64,NO_RESPONSE_LIMIT=3,TARGET_LIMIT=60,DEADBAND=2,EXTERNAL_CONTROL=0,FOLLOW_DEADBAND=1
+ )(
+  input wire clk,rst_n,enable_request,k4_n,k2_n,
++ input wire request,following,external_cancel,input wire [3:0] external_cancel_reason,
+  input wire signed [31:0] encoder_count,input wire [15:0] encoder_errors,
+  input wire visual_valid,visual_stale,settings_ready,config_changed,
+  input wire signed [7:0] visual_target,
+@@ -19,10 +20,14 @@
+ );
+  localparam [3:0] OFF=0,ARM=1,READY=2,SETUP=3,HIGH_PHASE=4,LOW_PHASE=5,SETTLE=6,CHECK=7,FAULT=8,ALIGN=9;
+  wire enable_raw=enable_request & k4_n;
+- wire permit=visual_valid && !visual_stale && settings_ready && !config_changed;
++ wire extended_cancel=EXTERNAL_CONTROL && external_cancel;
++ wire permit=visual_valid && !visual_stale && settings_ready && !config_changed && !extended_cancel;
+  reg sync1=0,sync2=0,candidate=0,stable_pressed=0,stable_valid=0;
+  reg [31:0] debounce_count=0;
++ reg key_armed=0;
+  reg previous_pressed=0,press_event=0;
++ wire command_event=EXTERNAL_CONTROL ? request : press_event;
++ wire command_armed=EXTERNAL_CONTROL ? 1'b1 : key_armed;
+  always @(posedge clk)begin
+   if(!rst_n)begin sync1<=0;sync2<=0;candidate<=0;stable_pressed<=0;stable_valid<=0;
+    debounce_count<=0;previous_pressed<=0;press_event<=0;end
+@@ -36,7 +41,7 @@
+    end
+   end
+  end
+- reg enabled=0,key_armed=0,active=0,done=0,dir_r=0,step_r=0;
++ reg enabled=0,active=0,done=0,dir_r=0,step_r=0;
+  reg signed [31:0] origin=0;
+  reg [31:0] enable_count=0,phase_count=0,action_timer=0;
+  reg signed [32:0] before_position=0;
+@@ -44,7 +49,8 @@
+  wire signed [32:0] wide_position=origin_valid ? $signed({origin[31],origin})-$signed({encoder_count[31],encoder_count}) : 33'sd0;
+  wire signed [32:0] wide_error=$signed({locked_target[31],locked_target})-wide_position;
+  wire signed [32:0] displacement=wide_position-before_position;
+- wire in_band=wide_error<=DEADBAND && wide_error>=-DEADBAND;
++ wire [31:0] allowed_error=EXTERNAL_CONTROL && following ? FOLLOW_DEADBAND : DEADBAND;
++ wire in_band=wide_error<=$signed(allowed_error) && wide_error>=-$signed(allowed_error);
+  assign position=wide_position[31:0];assign error=wide_error[31:0];
+  assign motor_en=rst_n & enable_raw & enabled & (fault==0) & (encoder_errors==0);
+  assign motor_dir=motor_en & dir_r;
+@@ -65,7 +71,7 @@
+    enable_count<=0;phase_count<=0;action_timer<=0;before_position<=0;no_response<=0;wrong_direction<=0;
+   end else begin
+    // Record rejected edges even while disabled/busy. No queue or held-key replay.
+-   if(press_event)begin
++   if(command_event)begin
+     if(fault!=0 || encoder_errors!=0)reject_reason<=9;
+     else if(!enable_raw)reject_reason<=1;
+     else if(busy)reject_reason<=6;
+@@ -73,7 +79,7 @@
+     else if(!settings_ready || config_changed)reject_reason<=5;
+     else if(visual_stale)reject_reason<=4;
+     else if(!visual_valid)reject_reason<=3;
+-    else if(!key_armed)reject_reason<=8;
++    else if(!command_armed)reject_reason<=8;
+     else if(visual_target>TARGET_LIMIT || visual_target< -TARGET_LIMIT)reject_reason<=7;
+    end
+    if(fault!=0)begin enabled<=0;active<=0;done<=0;step_r<=0;state<=FAULT;cancel_reason<=6;end
+@@ -95,20 +101,25 @@
+     fault<=4;step_r<=0;active<=0;done<=0;state<=FAULT;cancel_reason<=6;
+    end else if(!permit)begin
+     step_r<=0;active<=0;state<=READY;phase_count<=0;action_timer<=0;
+-    if(active)begin done<=0;cancel_reason<=config_changed || !settings_ready ? 5 : (visual_stale ? 4 : 3);end
++    if(active)begin done<=0;cancel_reason<=extended_cancel ? external_cancel_reason : (config_changed || !settings_ready ? 5 : (visual_stale ? 4 : 3));end
+    end else begin
+     if(active)action_timer<=action_timer+1'b1;
+     case(state)
+      READY:begin
+       step_r<=0;phase_count<=0;
+-      if(press_event && key_armed && visual_target<=TARGET_LIMIT && visual_target>=-TARGET_LIMIT)begin
++      if(command_event && command_armed && visual_target<=TARGET_LIMIT && visual_target>=-TARGET_LIMIT)begin
+        locked_target<={{24{visual_target[7]}},visual_target};spent<=0;no_response<=0;wrong_direction<=0;
+        action_timer<=0;active<=1;done<=0;state<=CHECK;cancel_reason<=0;reject_reason<=0;
+        accepted_count<=accepted_count+1'b1;
+       end
+      end
+      CHECK:begin
+-      if(in_band)begin active<=0;done<=1;state<=READY;completed_count<=completed_count+1'b1;end
++      if(EXTERNAL_CONTROL && following && (visual_target>TARGET_LIMIT || visual_target< -TARGET_LIMIT))begin
++       fault<=8;step_r<=0;active<=0;done<=0;state<=FAULT;cancel_reason<=6;
++      end else if(EXTERNAL_CONTROL && following && locked_target!={{24{visual_target[7]}},visual_target})begin
++       // Retarget only after the previous pulse/feedback phase. Never reset budget/time.
++       locked_target<={{24{visual_target[7]}},visual_target};
++      end else if(in_band)begin active<=0;done<=1;state<=READY;completed_count<=completed_count+1'b1;end
+       else if(spent>=MOVE_BUDGET)begin fault<=5;step_r<=0;active<=0;state<=FAULT;cancel_reason<=6;end
+       else if((wide_error>0 && command_position>=POSITION_LIMIT) || (wide_error<0 && command_position<=-POSITION_LIMIT))begin
+        fault<=6;step_r<=0;active<=0;state<=FAULT;cancel_reason<=6;

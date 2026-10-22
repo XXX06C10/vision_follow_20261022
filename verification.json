@@ -1,0 +1,728 @@
+{
+  "status": "SOFTWARE_BUILD_PASS_AWAITING_PHYSICAL_CONTINUOUS_CONTROL_TEST",
+  "date": "2026-10-22",
+  "device": "PH1P35MDG324",
+  "bit": "D:\\AAAProject\\FPGA\\HX1P35A_Contest_202606\\exercise\\vision_follow_20261022\\output\\vision_follow_20261022.bit",
+  "delivery_bit": "D:\\AAAProject\\FPGA\\HX1P35A_Contest_202606\\exercise\\vision_follow_20261022\\output\\vision_follow_20261022.bit",
+  "sha256": "1890c0545bd035ef84b0b8406653483c17826084f8b423d0f2ee671327f2c062",
+  "physical_test": "PENDING_USER_BOARD_TEST",
+  "automatic_motion": {
+    "continuous_PD": true,
+    "manual_K2_snapshot": true,
+    "explicit_software_reference_return": true,
+    "K2_required_to_start": true,
+    "automatic_resume": false,
+    "automatic_homing": false
+  },
+  "direction": {
+    "human_confirmed": "motor down -> ball right",
+    "P_delta_human": "not recalled; user authorized log default",
+    "default": "normal, positive P reference tilt assumed to move ball left, from log trend; configurable P gain bit7",
+    "physical_dynamic_calibration": false
+  },
+  "parent_large60_bit_sha256": "2c4d1f78aea341f11e157d289467434596a03739af1769e3c8109b875f9099eb",
+  "parent_large60_archive": "D:\\AAAProject\\FPGA\\AAA_LookHere\\成功版本归档\\20261022_large60_连续控制前",
+  "parent_observations": "large60 logs show finite moves, not measured ball-loop stability or complete mechanical calibration",
+  "flash_cold_boot": "not tested; SRAM bit delivery; no hardware programming performed",
+  "motion_bounds": {
+    "target_counts": [
+      -60,
+      60
+    ],
+    "manual_deadband_counts": 2,
+    "follow_deadband_counts": 1,
+    "active_burst_pulse_budget": 64,
+    "active_burst_timeout_seconds": 5,
+    "no_response_pulses": 3,
+    "wrong_direction_observations": 2,
+    "net_command_limit_pulses": 64,
+    "feedback_limit_counts": 64,
+    "stale_ms": 200,
+    "CHECK_retarget_does_not_reset_budget_or_timer": true
+  },
+  "control_parameters": {
+    "gain_range": [
+      0,
+      12
+    ],
+    "limit_range": [
+      0,
+      60
+    ],
+    "damping_range": [
+      0,
+      16
+    ],
+    "slew_range": [
+      1,
+      8
+    ],
+    "runtime_seconds_range": [
+      0,
+      300
+    ],
+    "defaults": {
+      "mode": 1,
+      "gain": 4,
+      "limit": 12,
+      "damping": 12,
+      "slew": 2,
+      "runtime_seconds": 30
+    },
+    "control_tick_ms": 100,
+    "velocity_format": "signed Q4 pixels/frame; filtered (3*VE + delta*16)/4; delta clipped +/-256",
+    "P_V_format_checksum_unchanged": true,
+    "S_config_only": true
+  },
+  "K3_center": {
+    "requires_idle_session": true,
+    "center_confirmed_required_for_auto": true,
+    "K1_required": false,
+    "motor_motion": false,
+    "resets_encoder_reference": false,
+    "same_cycle_UART_commit_priority": true,
+    "nonvolatile": false
+  },
+  "software_reference": "origin captured once after first K1 enable settles; not a mechanical home or measured platform level",
+  "simulations": [
+    "retained finite executor with eight latched fault guards",
+    "large +60/0/-60/0 at1.28 counts/pulse and production timing; direct cross-end budget fault",
+    "K3 capture/reject/collision and coherent wire echo",
+    "real camera RX and I2C completion/ROI CDC",
+    "full720p detection integration",
+    "full automatic session, safe CHECK retarget, K2 held/toggle/stop, manual/return, loss/stale/settings/K1/K4/fault, runtime and no resume",
+    "moving targets cannot reset timeout or64pulse budget",
+    "three explicitly assumed rolling-ball models with disturbance; no measured physical calibration"
+  ],
+  "large_target_regression": [
+    {
+      "target": 60,
+      "position": 58,
+      "error": 2,
+      "pulses": 46,
+      "scaled_cycles": 345047
+    },
+    {
+      "target": 0,
+      "position": 2,
+      "error": -2,
+      "pulses": 44,
+      "scaled_cycles": 330045
+    },
+    {
+      "target": -60,
+      "position": -58,
+      "error": -2,
+      "pulses": 48,
+      "scaled_cycles": 360049
+    },
+    {
+      "target": 0,
+      "position": -2,
+      "error": 2,
+      "pulses": 44,
+      "scaled_cycles": 330045
+    },
+    {
+      "target": 60,
+      "position": 58,
+      "error": 2,
+      "pulses": 48,
+      "scaled_cycles": 360049
+    }
+  ],
+  "assumed_plant_cases": [
+    {
+      "id": 0,
+      "coupling": 0.06,
+      "peak_pixels": 140.0,
+      "final_error_pixels": 46.477251,
+      "final_velocity_pixels_per_frame": 0.541609,
+      "rms_tail_pixels": 35.352636,
+      "P": 1
+    },
+    {
+      "id": 1,
+      "coupling": 0.04,
+      "peak_pixels": 180.0,
+      "final_error_pixels": -28.926926,
+      "final_velocity_pixels_per_frame": 0.977613,
+      "rms_tail_pixels": 36.754625,
+      "P": -1
+    },
+    {
+      "id": 2,
+      "coupling": 0.08,
+      "peak_pixels": 90.0,
+      "final_error_pixels": -46.907338,
+      "final_velocity_pixels_per_frame": -0.56135,
+      "rms_tail_pixels": 32.370993,
+      "P": -1
+    }
+  ],
+  "plant_limits": "final abs(error)<=80px and abs(velocity)<=1px/frame at28s, with residual oscillation/quantization; not a physical accuracy claim",
+  "report_version": 5,
+  "wire_UART_bytes": 429,
+  "parameter_packet_bytes": 20,
+  "camera_packet_bytes": 32,
+  "follow_packet_bytes": 18,
+  "source_manifest": "D:\\AAAProject\\FPGA\\HX1P35A_Contest_202606\\exercise\\vision_follow_20261022\\build_sources.json",
+  "baseline_files_frozen": 37,
+  "camera_IP_files_byte_identical": 193,
+  "executor_lineage": "finite executor byte-identical to archived large60; exact documented external interface/CHECK retarget/auto DB1 adaptation checked; reference 427ec3b403e4264dd607caf8aca347bc0005d3f5c210cd95c1b1c863eab0ac3d",
+  "camera_defaults": {
+    "exposure": 3600,
+    "sensor_gain": 143
+  },
+  "ROI": "1920x1080 host ->1280x720 sensor, existing frame-boundary commit",
+  "resources": {
+    "slice": 18132,
+    "register": 18073,
+    "IO": 76,
+    "ERAM": 45,
+    "DSP": 21
+  },
+  "timing_ns": {
+    "SWNS": 0.011,
+    "STNS": 0.0,
+    "HWNS": 0.02,
+    "HTNS": 0.0
+  },
+  "STA_coverage_percent": 97.03,
+  "timing_limitations": "original clocks/groups retained; held-data camera mailboxes bounded10ns; positive routed timing is not board validation",
+  "routed_pins": {
+    "I_button[3]": {
+      "pin": "C7",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "I_button[2]": {
+      "pin": "B9",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "I_button[1]": {
+      "pin": "A9",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "I_button[0]": {
+      "pin": "D5",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "I_encoder_j1[1]": {
+      "pin": "E16",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLDOWN"
+    },
+    "I_encoder_j1[0]": {
+      "pin": "E17",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLDOWN"
+    },
+    "I_encoder_j2[1]": {
+      "pin": "U1",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLDOWN"
+    },
+    "I_encoder_j2[0]": {
+      "pin": "T4",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLDOWN"
+    },
+    "I_rst_n": {
+      "pin": "R10",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "I_sys_clk": {
+      "pin": "C4",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "I_uart_rx": {
+      "pin": "J1",
+      "direction": "INPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "LED[3]": {
+      "pin": "D6",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "LED[2]": {
+      "pin": "C6",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "LED[1]": {
+      "pin": "E10",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "LED[0]": {
+      "pin": "D10",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "O_cam_24m": {
+      "pin": "L3",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "O_cam_rst": {
+      "pin": "L2",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "O_cam_scl": {
+      "pin": "K3",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "O_motor_dir": {
+      "pin": "D15",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "O_motor_dir_v1": {
+      "pin": "V1",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "O_motor_en": {
+      "pin": "E12",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "O_motor_en_u2": {
+      "pin": "U2",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "O_motor_step": {
+      "pin": "C18",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "O_motor_step_v2": {
+      "pin": "V2",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "O_screen_pwm": {
+      "pin": "R11",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLDOWN"
+    },
+    "O_tmds_ch0_p": {
+      "pin": "G16",
+      "direction": "OUTPUT",
+      "standard": "TMDS33",
+      "pull": "NONE"
+    },
+    "O_tmds_ch0_p(n)": {
+      "pin": "H16",
+      "direction": "OUTPUT",
+      "standard": "TMDS33",
+      "pull": "NONE"
+    },
+    "O_tmds_ch1_p": {
+      "pin": "F17",
+      "direction": "OUTPUT",
+      "standard": "TMDS33",
+      "pull": "NONE"
+    },
+    "O_tmds_ch1_p(n)": {
+      "pin": "E18",
+      "direction": "OUTPUT",
+      "standard": "TMDS33",
+      "pull": "NONE"
+    },
+    "O_tmds_ch2_p": {
+      "pin": "H14",
+      "direction": "OUTPUT",
+      "standard": "TMDS33",
+      "pull": "NONE"
+    },
+    "O_tmds_ch2_p(n)": {
+      "pin": "H13",
+      "direction": "OUTPUT",
+      "standard": "TMDS33",
+      "pull": "NONE"
+    },
+    "O_tmds_clk_p": {
+      "pin": "C17",
+      "direction": "OUTPUT",
+      "standard": "TMDS33",
+      "pull": "NONE"
+    },
+    "O_tmds_clk_p(n)": {
+      "pin": "D18",
+      "direction": "OUTPUT",
+      "standard": "TMDS33",
+      "pull": "NONE"
+    },
+    "O_uart_tx": {
+      "pin": "H1",
+      "direction": "OUTPUT",
+      "standard": "LVCMOS33",
+      "pull": "NONE"
+    },
+    "ddr_addr[12]": {
+      "pin": "S82_5",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[11]": {
+      "pin": "S82_47",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[10]": {
+      "pin": "S82_11",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[9]": {
+      "pin": "S82_6",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[8]": {
+      "pin": "S82_48",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[7]": {
+      "pin": "S82_7",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[6]": {
+      "pin": "S82_49",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[5]": {
+      "pin": "S82_8",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[4]": {
+      "pin": "S82_50",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[3]": {
+      "pin": "S82_9",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[2]": {
+      "pin": "S82_51",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[1]": {
+      "pin": "S82_10",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_addr[0]": {
+      "pin": "S82_52",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_ba[1]": {
+      "pin": "S82_12",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_ba[0]": {
+      "pin": "S82_13",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_cas_n": {
+      "pin": "S82_53",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_ck_n[0]": {
+      "pin": "S82_57",
+      "direction": "OUTPUT",
+      "standard": "DIFF_SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_ck_p[0]": {
+      "pin": "S82_58",
+      "direction": "OUTPUT",
+      "standard": "DIFF_SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_cke[0]": {
+      "pin": "S82_15",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_cs_n[0]": {
+      "pin": "S82_54",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_odt[0]": {
+      "pin": "S82_55",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_ras_n": {
+      "pin": "S82_56",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_we_n": {
+      "pin": "S82_14",
+      "direction": "OUTPUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "IO_cam_sda": {
+      "pin": "J3",
+      "direction": "INOUT",
+      "standard": "LVCMOS33",
+      "pull": "PULLUP"
+    },
+    "ddr_dm[1]": {
+      "pin": "S82_37",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dm[0]": {
+      "pin": "S82_28",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[15]": {
+      "pin": "S82_76",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[14]": {
+      "pin": "S82_35",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[13]": {
+      "pin": "S82_72",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[12]": {
+      "pin": "S82_31",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[11]": {
+      "pin": "S82_32",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[10]": {
+      "pin": "S82_73",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[9]": {
+      "pin": "S82_34",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[8]": {
+      "pin": "S82_75",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[7]": {
+      "pin": "S82_67",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[6]": {
+      "pin": "S82_26",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[5]": {
+      "pin": "S82_64",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[4]": {
+      "pin": "S82_23",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[3]": {
+      "pin": "S82_22",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[2]": {
+      "pin": "S82_63",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[1]": {
+      "pin": "S82_25",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dq[0]": {
+      "pin": "S82_66",
+      "direction": "INOUT",
+      "standard": "SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dqs_n[1]": {
+      "pin": "S82_79",
+      "direction": "INOUT",
+      "standard": "DIFF_SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dqs_n[0]": {
+      "pin": "S82_70",
+      "direction": "INOUT",
+      "standard": "DIFF_SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dqs_p[1]": {
+      "pin": "S82_78",
+      "direction": "INOUT",
+      "standard": "DIFF_SSTL15",
+      "pull": "N/A"
+    },
+    "ddr_dqs_p[0]": {
+      "pin": "S82_69",
+      "direction": "INOUT",
+      "standard": "DIFF_SSTL15",
+      "pull": "N/A"
+    }
+  },
+  "routed_motor_drivers": {
+    "O_motor_step": "O_motor_step_v2_dup_1",
+    "O_motor_step_v2": "O_motor_step_v2_dup_1",
+    "O_motor_dir": "O_motor_dir_v1_dup_1",
+    "O_motor_dir_v1": "O_motor_dir_v1_dup_1",
+    "O_motor_en": "\\u_vision_monitor/motor_core/active_i3_syn_10",
+    "O_motor_en_u2": "\\u_vision_monitor/motor_core/active_i3_syn_10"
+  },
+  "official_pin_reference": "D:\\AAAProject\\FPGA\\HX1P35A_Contest_202606\\2_Example\\32_cs500_mipi_hdmi\\pin\\pin.adc",
+  "host_tests": [
+    "HOST_SELF_TEST_PASS: VIS5 signed Q4 velocity, unique RT/RU fields, S bounds/checksum/readback, unchanged P/V packets, ROI and completion ack",
+    "HOST_UI_SMOKE_PASS: VIS5 Chinese modes/damping/runtime, center readback, ROI draw/move and 240-point curves rendered; no serial opened"
+  ],
+  "remaining_camera_IP_undriven_warnings": [
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_hdmi_tx/u_key_remove_shakes/I_rst_n\" in ../user_source/hdl_source/key_remove_shakes.v(14)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/O_tready\" in ../user_source/hdl_source/isp/isp_top.v(9)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/u_awb/signal_delay_d/rd_en_syn_3\" in ../user_source/hdl_source/signal_delay.v(34)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/u_awb/signal_delay_d/blk_mem_gen_awb_delay_signal_d/ram_f84573da5ab5_Inst/dib[95]\" in ../user_source/ip_source/blk_mem_gen_awb_delay_signal/ram_f84573da5ab5.v(30)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/u_awb/signal_delay_d/blk_mem_gen_awb_delay_signal_d/ram_f84573da5ab5_Inst/dib[94]\" in ../user_source/ip_source/blk_mem_gen_awb_delay_signal/ram_f84573da5ab5.v(30)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/u_awb/signal_delay_d/blk_mem_gen_awb_delay_signal_d/ram_f84573da5ab5_Inst/dib[93]\" in ../user_source/ip_source/blk_mem_gen_awb_delay_signal/ram_f84573da5ab5.v(30)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/u_awb/signal_delay_d/blk_mem_gen_awb_delay_signal_d/ram_f84573da5ab5_Inst/dib[92]\" in ../user_source/ip_source/blk_mem_gen_awb_delay_signal/ram_f84573da5ab5.v(30)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/u_awb/signal_delay_d/blk_mem_gen_awb_delay_signal_d/ram_f84573da5ab5_Inst/dib[91]\" in ../user_source/ip_source/blk_mem_gen_awb_delay_signal/ram_f84573da5ab5.v(30)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/u_awb/signal_delay_d/blk_mem_gen_awb_delay_signal_d/ram_f84573da5ab5_Inst/dib[90]\" in ../user_source/ip_source/blk_mem_gen_awb_delay_signal/ram_f84573da5ab5.v(30)",
+    "SYN-5013 WARNING: Undriven net: model \"design_top_wrapper\" / net \"u_isp_top/u_awb/signal_delay_d/blk_mem_gen_awb_delay_signal_d/ram_f84573da5ab5_Inst/dib[89]\" in ../user_source/ip_source/blk_mem_gen_awb_delay_signal/ram_f84573da5ab5.v(30)",
+    "SYN-5025 WARNING: Using 0 for all undriven pins and nets",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_isp_top/u_demosaic/raw_matrix_3x3_buffer_d/two_line_buffer[2]$line_buffer_demosaic_r1/blk_mem_gen_demosaic_r0/ram_c36c2ca3b3a7_Inst/username_inst\" in ../user_source/hdl_source/isp/demosaic_4x_2_0/blk_mem_gen_demosaic/RTL/ram_c36c2ca3b3a7.v(91) / pin \"bea[0]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_isp_top/u_demosaic/raw_matrix_3x3_buffer_d/two_line_buffer[2]$line_buffer_demosaic_r1/blk_mem_gen_demosaic_r0/ram_c36c2ca3b3a7_Inst/username_inst\" in ../user_source/hdl_source/isp/demosaic_4x_2_0/blk_mem_gen_demosaic/RTL/ram_c36c2ca3b3a7.v(91) / pin \"beb[0]\"",
+    "SYN-5025 WARNING: Using 0 for all undriven pins and nets",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[7]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[6]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[5]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[4]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[3]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[2]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[1]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_24\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[0]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_25\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[7]\"",
+    "SYN-5011 WARNING: Undriven pin: model \"design_top_wrapper\" / inst \"u_ph1p35_324_ddr_wrapper/u_ddr2/ph1p_ddrmc_wrapper/ph1p_ddrmc_top/u_ddr_phy/u_ddrphy_top/u_ddrphy_init/ramread0_syn_25\" in ../user_source/hdl_source/ph1p35_ddr/ddr2/src/rtl/phy/ph1p_ddrphy_init.v(73) / pin \"di[6]\"",
+    "SYN-5025 WARNING: Using 0 for all undriven pins and nets"
+  ],
+  "reference_clock_routing_notices": [
+    "PHY-5060 CRITICAL-WARNING: Clock net candidate u_uicfgcs500/uii2c_inst/scl_clk has mixed fanouts of 1 clock pins; 2 data/ctrl pins. Please check connection of the net in design.",
+    "PHY-5060 CRITICAL-WARNING: Clock net candidate O_cam_24m_syn_3 has mixed fanouts of 249 clock pins; 1 data/ctrl pins. Please check connection of the net in design.",
+    "PHY-5079 CRITICAL-WARNING: Marked 1 clock net(s) utilize the local routing resources. Please check log message and the sinks of clock nets."
+  ],
+  "camera_confirmation": "configuration-flow completion, not electrical register/ACK readback",
+  "pending_physical": [
+    "correction direction check",
+    "actual plant tuning and stability",
+    "mechanical platform level/calibration",
+    "contest performance",
+    "power-cycle/Flash persistence"
+  ]
+}
