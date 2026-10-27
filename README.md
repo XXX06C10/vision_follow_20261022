@@ -1,5 +1,9 @@
 # 单轴视觉闭环：手动 / 连续PD / 软件参考返回
 
+> **仓库目录区分**
+> - 仓库根目录：2026-10-22 的 `vision_follow_20261022` 源码快照（含上位机、仿真、验证/发布脚本）。
+> - [`merged_vision_motor_logo/`](merged_vision_motor_logo/)：2026-10-27 的“视觉 + 电机 + HDMI OSD/Logo”合并版本，独立构建，不含上位机/仿真/验证脚本，仅通过 TD 布线时序检查，未做实物验证。该目录不会替换根目录快照的结论。
+
 2026-10-22。沿已实板运行成功的运动脚本和核心改造，独立于large60父工程。
 
 - [新bit（VIS=5，连续控制）](D:/AAAProject/FPGA/HX1P35A_Contest_202606/exercise/vision_follow_20261022/output/vision_follow_20261022.bit)

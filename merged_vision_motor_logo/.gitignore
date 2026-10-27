@@ -1,0 +1,17 @@
+# Generated build outputs for this merged variant
+logo_Runs/
+logo_routed_netlist.v
+*.bit
+*.db
+*.log
+*.logw
+*.area
+*.qor
+*.rpt
+*.timing
+*.ts
+*.bid
+
+# Python
+__pycache__/
+*.py[cod]
